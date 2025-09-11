@@ -72,6 +72,7 @@ def main():
         Voici un exemple d'image de Cityscapes avec son masque de segmentation associé :
         """)
         img1 = Image.open("images/cityscapes_1.jpg")
+        img1 = img1.resize((200,200))
         col1,col2,col3 = st.columns([1,2,1])
         with col2:
             st.image(img1, use_column_width=True)
@@ -597,6 +598,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
