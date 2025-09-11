@@ -75,7 +75,9 @@ def main():
         img1 = img1.resize((200,200))
         col1,col2,col3 = st.columns([1,2,1])
         with col2:
-            st.image(img1, use_column_width=True)
+            with st.spinner("Chargement de l'image..."):
+                st.image(img1, use_column_width=True)
+            st.success("Image chargée")
         # img1_base64 = get_img_base64(img1)
 
         # st.markdown(
@@ -598,6 +600,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
