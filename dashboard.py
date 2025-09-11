@@ -72,17 +72,20 @@ def main():
         Voici un exemple d'image de Cityscapes avec son masque de segmentation associé :
         """)
         img1 = Image.open("images/cityscapes_1.jpg")
-        img1_base64 = get_img_base64(img1)
+        col1,col2,col3 = st.columns([1,2,1])
+        with col2:
+            st.image(img1, use_column_width=True)
+        # img1_base64 = get_img_base64(img1)
 
-        st.markdown(
-            f"""
-            <div style="text-align: center;">
-                <img src="data:image/png;base64,{img1_base64}" alt="image" style="max-width:100%; height:auto;">
-                <p style="font-size:14px; color:gray;">Exemple d’une image Cityscapes et son masque associé</p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
+        # st.markdown(
+        #     f"""
+        #     <div style="text-align: center;">
+        #         <img src="data:image/png;base64,{img1_base64}" alt="image" style="max-width:100%; height:auto;">
+        #         <p style="font-size:14px; color:gray;">Exemple d’une image Cityscapes et son masque associé</p>
+        #     </div>
+        #     """,
+        #     unsafe_allow_html=True
+        # )
 
         st.markdown("""
         Dans ce projet, nous avons regroupé les 34 classes initiales en 8 catégories : vide, route/trottoir, construction, objet, nature, ciel, humain et vehicule.
@@ -594,6 +597,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
