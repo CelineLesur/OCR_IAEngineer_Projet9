@@ -140,6 +140,10 @@ def main():
         # Charger les fichiers d'images du dossier
         image_files = [f for f in os.listdir(IMG_DIR) if not f.startswith("pred") and f.lower().endswith((".png"))]
 
+        if not image_files :
+            st.warning("Aucune image trouvée")
+            return
+
         st.selectbox(
         "Choisissez une image :",
         image_files,
@@ -590,4 +594,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
