@@ -2,14 +2,11 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-# import plotly.express as px
-# import streamlit.components.v1 as components
 from PIL import Image, ImageOps
 import os
 import base64
 from io import BytesIO
 import numpy as np
-# import cv2
 
 def get_img_base64(img: Image.Image) -> str:
     buffer = BytesIO()
@@ -593,3 +590,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
