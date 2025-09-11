@@ -71,13 +71,7 @@ def main():
         st.markdown("""
         Voici un exemple d'image de Cityscapes avec son masque de segmentation associé :
         """)
-        img1 = Image.open("images/cityscapes.jpg")
-        # img1 = img1.resize((200,200))
-        # col1,col2,col3 = st.columns([1,2,1])
-        # with col2:
-        #     with st.spinner("Chargement de l'image..."):
-        #         st.image(img1, use_column_width=True)
-        #     st.success("Image chargée")
+        img1 = Image.open("images/cityscapes_1.jpg")
         img1_base64 = get_img_base64(img1)
 
         st.markdown(
@@ -600,6 +594,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
