@@ -93,21 +93,21 @@ def main():
         st.markdown("""
         Regardons la distribution de ces 8 catégories dans les images du jeu d'entraînement (2975 images) et de validation (500 images) :
         """)
-        img2 = Image.open("images/cityscapes_2.jpg")
-        img2_base64 = get_img_base64(img2)
+        # img2 = Image.open("images/cityscapes_2.jpg")
+        # img2_base64 = get_img_base64(img2)
 
-        st.markdown(
-            f"""
-            <div style="text-align: center;">
-                <img src="data:image/png;base64,{img2_base64}" alt="image" style="max-width:35%; height:auto;">
-                <p style="font-size:14px; color:gray;">Distribution des 8 catégories dans le jeu d'entraînement et de validation</p>
-            </div>
-            """,
-            unsafe_allow_html=True
-        )
-        st.markdown("""
-        On peut constater un fort déséquilibre des classes dans le jeu de données Cityscapes. Ce sera une limitation pour notre projet de segmentation sémantique car il sera plus difficile pour les modèles de prédire les classes rares.
-        """)
+        # st.markdown(
+        #     f"""
+        #     <div style="text-align: center;">
+        #         <img src="data:image/png;base64,{img2_base64}" alt="image" style="max-width:35%; height:auto;">
+        #         <p style="font-size:14px; color:gray;">Distribution des 8 catégories dans le jeu d'entraînement et de validation</p>
+        #     </div>
+        #     """,
+        #     unsafe_allow_html=True
+        # )
+        # st.markdown("""
+        # On peut constater un fort déséquilibre des classes dans le jeu de données Cityscapes. Ce sera une limitation pour notre projet de segmentation sémantique car il sera plus difficile pour les modèles de prédire les classes rares.
+        # """)
     
     # with tab2:
     #     st.header("Prédictions avec U-Net")
@@ -597,6 +597,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
