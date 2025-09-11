@@ -7,8 +7,10 @@ import os
 import base64
 from io import BytesIO
 import numpy as np
-
-st.write("bonjour")
+def main():
+    st.write("bonjour")
+if __name__ == "__main__":
+    main()
 # def get_img_base64(img: Image.Image) -> str:
 #     buffer = BytesIO()
 #     img.save(buffer, format="PNG")
@@ -601,6 +603,7 @@ st.write("bonjour")
 
 # if __name__ == "__main__":
 #     main()
+
 
 
 
