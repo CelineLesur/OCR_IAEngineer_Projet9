@@ -5,3 +5,5 @@ matplotlib
 PIL 
 io
 numpy
+os
+base64
