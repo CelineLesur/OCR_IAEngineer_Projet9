@@ -588,14 +588,28 @@ def main():
             st.pyplot(fig2)
 
         st.markdown("""
+        Si l'on considère les résultats globaux et plus particulièrement notre métrique prioritaire, l'IoU pondéré, Mask2Former domine nettement avec 91 %, devant U-Net (82 %) et SegFormer (78 %). Cela montre que Mask2Former segmente de manière plus précise sur les classes fréquentes. Cependant, Mask2Former ne prédit pas la classe vide, il est donc difficile de comparer ces résultats avec ceux des autres modèles.
         """) 
 
-
+        st.markdown("""
+        La seule option est de comparer les métriques par classe. Par classe, on voit tout de suite que Mask2Former performe plus que les autres modèles, en particulier sur les classes rares.
+        """) 
+        
+        st.markdown("""
+        SegFormer affiche ici des résultats légèrement inférieurs à U-Net sur la majorité des métriques ce qui s’explique principalement par l’entraînement from scratch sans recours à un pré-entraînement, ce qui limite sa capacité de généralisation, en particulier sur un jeu de données restreint. Il est intéressant de noter que lorsque l’on compare des conditions strictement équivalentes, c’est-à-dire U-Net sans encodeur pré-entraîné vs SegFormer sans encodeur pré-entraîné, tous deux entraînés sur seulement 5 epochs, SegFormer démontre une meilleure capacité d’apprentissage initiale :
+        """) 
+        
+        st.markdown("""
+        - IoU pondéré : 69.7% (U-Net) vs 73.7% (SegFormer)
+        """) 
+        
+        st.markdown("""
+        - IoU macro : 54.9% (U-Net) vs 58.4% (SegFormer)
+        """)  
+        
+        st.markdown("""
+        Ces résultats partiels suggèrent que, même sans pré-entraînement, l’architecture de SegFormer lui permet de mieux exploiter les premiers signaux d’apprentissage que U-Net. Cela confirme que son déficit global dans nos expériences provient surtout du manque de pré-entraînement et non d’une faiblesse intrinsèque de l’architecture.
+        """) 
 
 if __name__ == "__main__":
     main()
-
-
-
-
-
