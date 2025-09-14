@@ -36,18 +36,21 @@ P8_Mask2Formerr.ipynb → Inférence du modèle de segmentation de type Mask2For
 
 #### Prerequisites
 
-Python 3.9
+Python 3.11
 
 #### Dependencies
 
 - fastapi==0.115.1
-- numpy==1.24.4
+- numpy
 - pillow
 - tensorflow-cpu==2.10.0
 - keras==2.10.0
 - git+https://github.com/qubvel/segmentation_models.git
 - azure-storage-blob
 - matplotlib
+- pandas
+- seaborn
 - opencv-python-headless==4.5.5.64
 - python-multipart
 - uvicorn[standard]
+- streamlit
