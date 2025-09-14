@@ -9,27 +9,34 @@ from io import BytesIO
 import numpy as np
 
 def get_img_base64(img: Image.Image) -> str:
+    """
+    Convertit une image PIL en chaîne base64 pour l’affichage inline dans Streamlit.
+    """
     buffer = BytesIO()
     img.save(buffer, format="PNG")
     return base64.b64encode(buffer.getvalue()).decode()
 
 def build_multiindex_from_colnames(df):
+    """
+    Transforme les colonnes de type 'Modèle-Métrique' en MultiIndex à deux niveaux :
+    (Modèle, Métrique).
+    """
     cols = df.columns.tolist()
     tuples = []
     for c in cols:
-        # on sépare sur le dernier espace pour garder les modèles pouvant contenir des espaces
+        # on sépare sur le dernier tiret pour garder les modèles pouvant contenir des tirets
         if "-" in c:
             model, metric = c.rsplit("-", 1)
         else:
             # fallback si pas de séparateur
             model, metric = c, ""
         tuples.append((model, metric))
-    # Sanity check : même taille
+    # Test : même taille
     if len(tuples) != len(cols):
         raise ValueError(f"Mismatch columns ({len(cols)}) vs tuples ({len(tuples)})")
     return pd.MultiIndex.from_tuples(tuples, names=["Modèle", "Métrique"])
 
-# STREAMLIT CONFIG
+# ========STREAMLIT CONFIG========
 st.set_page_config(
     page_title="Dashboard",
     layout="wide"
@@ -39,7 +46,7 @@ st.set_page_config(
 def main():
     st.title("Comparaisons de modèles pour la segmentation Sémantique")
 
-    # --- Création d'une selectbox avec session_state ---
+    # Synchronisation entre onglets
     if "selected_image" not in st.session_state:
         st.session_state.selected_image = "frankfurt_000000_000294_leftImg8bit.png"
 
@@ -55,14 +62,14 @@ def main():
     def sync_from_tab5():
         st.session_state.selected_image = st.session_state.tab5_selection
 
-    # Création de 3 onglets
+    # Création des onglets
     tab1, tab2, tab3, tab4, tab5 = st.tabs(["EDA", "U-Net", "SegFormer", "Mask2Former", "Synthèse"])
 
-     # --------------------- EDA ---------------------
+     # ========== EDA ============
     with tab1:
         st.header("Jeu de données Cityscapes")
 
-    # Texte explicatif sur Cityscapes
+        # Texte explicatif sur Cityscapes
         st.markdown("""
         Cityscapes est un jeu de données de référence dans le domaine de la segmentation sémantique urbaine.
         Il se compose de 5 000 images RGB haute résolution (2048×1024) prises dans 50 villes allemandes depuis des caméras embarquées, couvrant des scènes variées.
@@ -71,6 +78,7 @@ def main():
         st.markdown("""
         Voici un exemple d'image de Cityscapes avec son masque de segmentation associé :
         """)
+        # Visualisation d'un exemple d'image + masque
         img1 = Image.open("images/cityscapes_1.jpg")
         img1_base64 = get_img_base64(img1)
 
@@ -87,6 +95,7 @@ def main():
         st.markdown("""
         Dans ce projet, nous avons regroupé les 34 classes initiales en 8 catégories : vide, route/trottoir, construction, objet, nature, ciel, humain et vehicule.
         """)
+        # Visualisation de la distribution des classes
         st.markdown("""
         Regardons la distribution de ces 8 catégories dans les images du jeu d'entraînement (2975 images) et de validation (500 images) :
         """)
@@ -109,7 +118,7 @@ def main():
     with tab2:
         st.header("Prédictions avec U-Net")
 
-        # --------------------- UNET ---------------------
+        # =========== UNET ==================
         st.markdown("""
         Le meilleur modèle U-Net a été entraîné sur 50 epochs à partir d'images RGB de résolutions 224x224. Voici les hyper-paramètres  de ce modèle :
         """)
@@ -169,6 +178,7 @@ def main():
         st.markdown("""
         Voici les courbes d'entraînement de ce modèle :
         """)
+        # Courbes d'entrainement
         img3 = Image.open("images/unet_1.jpg")
         img3_base64 = get_img_base64(img3)
 
@@ -225,7 +235,7 @@ def main():
             st.subheader("Métriques par classe de U-Net")
             fig2, ax2 = plt.subplots(figsize=(6,4))
             
-            # --- Heatmap ---
+            # Heatmap 
             sns.heatmap(
                 df_classes.set_index("Classe"),
                 annot=True, fmt=".1f", cmap="YlGnBu", cbar=False, ax=ax2
@@ -239,7 +249,7 @@ def main():
     with tab3:
         st.header("Prédictions avec SegFormer B1")
 
-        # --------------------- SEGFORMER ---------------------
+        #=============SEGFORMER===============
         st.markdown("""
         Le meilleur modèle SegFormer a été entraîné sur 50 epochs à partir d'images RGB de résolutions 512x1024. Voici les hyper-paramètres  de ce modèle :
         """)
@@ -294,6 +304,7 @@ def main():
         st.markdown("""
         Voici les courbes d'entraînement de ce modèle :
         """)
+        #  Courbes d'entrainement
         img4 = Image.open("images/segformer_1.jpg")
         img4_base64 = get_img_base64(img4)
         st.markdown(
@@ -350,7 +361,7 @@ def main():
             st.subheader("Métriques par classe de SegFormer")
             fig2, ax2 = plt.subplots(figsize=(6,4))
             
-            # --- Heatmap ---
+            # Heatmap 
             sns.heatmap(
                 df_classes_seg.set_index("Classe"),
                 annot=True, fmt=".1f", cmap="YlGnBu", cbar=False, ax=ax2
@@ -364,7 +375,7 @@ def main():
     with tab4:
         st.header("Prédictions avec Mask2Former")
 
-        # --------------------- MASK2FORMER ---------------------
+        # ============== MASK2FORMER ==========
         st.markdown("""
         Le modèle Mask2Former pré-entraîné sur Cityscapes a été utilisé en inférence puisque seuls des modèles pré-entraînés sont disponibles. Voici les hyper-paramètres  de ce modèle :
         """)
@@ -471,6 +482,7 @@ def main():
 
     with tab5:
         st.header("Synthèse des résultats")
+        # ==================== SYNTHÈSE ====================
 
         # Liste déroulante
         st.selectbox(
@@ -546,15 +558,15 @@ def main():
 
             tuples = [tuple(c.split("-",1)) for c in df_classes_synt.columns[1:]]
 
-            # 2) Création du MultiIndex
+            # Création du MultiIndex
             multi_index = pd.MultiIndex.from_tuples(tuples, names=["Modèle", "Métrique"])
 
-            # 3) On reconstruit un DataFrame avec ce MultiIndex
+            # Construction DataFrame avec ce MultiIndex
             df_plot = pd.DataFrame(df_classes_synt.iloc[:, 1:].to_numpy(),
                                 index=df_classes_synt["Classe"],
                                 columns=multi_index)
 
-            # --- Heatmap ---
+            # Heatmap 
             fig2, ax2 = plt.subplots(figsize=(7, 4))
             sns.heatmap(df_plot, annot=True, fmt=".1f", cmap="YlGnBu",
                         cbar=False, linewidths=0.5, linecolor="white", ax=ax2)
@@ -613,3 +625,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
