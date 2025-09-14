@@ -13,48 +13,6 @@ J'ai choisi de m’inscrire dans une logique d'amélioration du travail réalis�
 
 ### Notebooks complets et commentés ci-dessous :
 
-https://github.com/CelineLesur/OCR_IAEngineer_Projet9/blob/main/P7_EDA.ipynb
+https://github.com/CelineLesur/OCR_IAEngineer_Projet9/blob/main/P9_SegFormer.ipynb
 
-https://github.com/CelineLesur/OCR_IAEngineer_Projet9/blob/main/P7_modele_base.ipynb
-
-https://github.com/CelineLesur/OCR_IAEngineer_Projet7/blob/main/P7_modele_avance.ipynb
-
-
-### Découpage des dossiers :
-📂 /
-
-main.py → Code principal de l’API FastAPI
-
-startup.sh → Code de démarrage d'Azure
-
-requirements.txt → Liste des packages nécessaires
-
-oryx-manifest.toml → Métadonnées sur le déploiement
-
-README.md → Explication du contexte du projet, de la hierarchie des fichiers et des packages utilisés
-
-📂 notebooks/
-
-P7_EDA.ipynb → Analyse exploratoire des données
-
-P7_modele_base.ipynb → Entraînement et évaluation du modèle de base : régression logistique
-
-P7_modele_avance.ipynb → Entraînement et évaluation de modèles de RNN (sans embeddings, avec embeddings GloVe, avec embeddings Fastext) et ModernBERT
-
-📂 test/
-
-test_api.py → Tests unitaires
-
-### Installation
-
-#### Prerequisites
-
-Python 3.11
-
-#### Dependencies
-
-- fastapi - version : 0.115.11
-- torch (https://download.pytorch.org/whl/cpu)
-- transformers - version : 4.49.0
-- azure-storage-blob
-- uvicorn
+https://github.com/CelineLesur/OCR_IAEngineer_Projet9/blob/main/P9_Mask2Former.ipynb
