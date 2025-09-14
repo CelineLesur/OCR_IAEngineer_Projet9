@@ -16,3 +16,38 @@ J'ai choisi de m’inscrire dans une logique d'amélioration du travail réalis�
 https://github.com/CelineLesur/OCR_IAEngineer_Projet9/blob/main/P9_SegFormer.ipynb
 
 https://github.com/CelineLesur/OCR_IAEngineer_Projet9/blob/main/P9_Mask2Former.ipynb
+
+### Découpage des dossiers :
+📂 /
+
+dashboard.py → Code du dashboard Streamlit de présentation des résultats
+
+requirements.txt → Liste des packages nécessaires
+
+README.md → Explication du contexte du projet, de la hierarchie des fichiers et des packages utilisés
+
+📂 notebooks/
+
+P8_SegFormer.ipynb → Entraînement et évaluation du modèle de segmentation de type SegFormer
+
+P8_Mask2Formerr.ipynb → Inférence du modèle de segmentation de type Mask2Former
+
+### Installation
+
+#### Prerequisites
+
+Python 3.9
+
+#### Dependencies
+
+- fastapi==0.115.1
+- numpy==1.24.4
+- pillow
+- tensorflow-cpu==2.10.0
+- keras==2.10.0
+- git+https://github.com/qubvel/segmentation_models.git
+- azure-storage-blob
+- matplotlib
+- opencv-python-headless==4.5.5.64
+- python-multipart
+- uvicorn[standard]
